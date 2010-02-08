@@ -105,6 +105,7 @@ public class SentenceAnalyzerTest {
         SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
         List<POSElement> documentList = DocumentTest.getDocumentList();
         ListMap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(documentList);
+        Assert.assertNotNull(listMap);
         listMap.printWithCounts();
     }
     
@@ -113,6 +114,7 @@ public class SentenceAnalyzerTest {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
     	POSSentence posSentence = createSentence();
         ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(posSentence);
+        Assert.assertNotNull(listMap);
         listMap.printWithCounts();
     }
 
@@ -121,6 +123,7 @@ public class SentenceAnalyzerTest {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
         List<POSElement> sentenceList = DocumentTest.getSentenceList();
         ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(sentenceList);
+        Assert.assertNotNull(listMap);
         listMap.printWithCounts();
     }
 
@@ -129,6 +132,7 @@ public class SentenceAnalyzerTest {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
         List<POSElement> documentList = DocumentTest.getDocumentList();
         ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(documentList);
+        Assert.assertNotNull(listMap);
         listMap.printWithCounts();
     }
 
