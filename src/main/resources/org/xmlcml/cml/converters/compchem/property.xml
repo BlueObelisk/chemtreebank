@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cml xmlns="http://www.xml-cml.org/schema"
+    xmlns:unitType="http://www.xml-cml.org/units/unitTypes">
+    <dictionary xmlns:cmlx="http://www.xml-cml.org/schema/cmlx"
+                namespace="http://www.xml-cml.org/dict/compchem/property"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+
+    <!-- Begin Superclasses -->
+    <entry id="property" term="property"
+    definition="property of molecule or calculated result"
+    description="this can be either calculated property of molecule or calcualted results.">
+    </entry>
+    <!-- End Superclasses -->
+
+    <!-- Begin Property Entries -->
+        <entry id="property.inchi" term="inchi" dataType="xsd:float"
+            definition="InChi string"
+            description="InChi string"
+            cmlx:superclass="cml:molecule" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.charge" term="charge" dataType="xsd:float"
+            definition="Charge of molecule"
+            description="Charge of molecule"
+            cmlx:superclass="cml:molecule" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.spinMultiplicity" term="spinMultiplicity" dataType="xsd:float"
+            definition="Spin multiplicity"  description="spin multiplicity of a molecule"
+            cmlx:superclass="cml:molecule" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.pointGroup" term="pointGroup"  dataType="xsd:string"
+            definition="Point group of a molecule"
+            description="needs a description"
+            cmlx:superclass="cml:molecule">
+        </entry>
+        <entry id="property.nsymrot" term="nsymrot"  dataType="xsd:integer"
+            definition="number of rotational symmetry of a molecule"
+            description="needs a description" cmlx:superclass="cml:molecule">
+        </entry>
+        <entry id="property.stoichiometry" term="stoichiometry" dataType="xsd:float"
+            definition="Stoichiometry of molecule"
+            description="element and number of each element"
+            cmlx:superclass="cml:molecule" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.rotconstants" term="rotationalconstants" dataType="xsd:float"
+            definition="Rotational constants of molecule"
+            description="needs a description"
+            cmlx:superclass="freq" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.freqmode" term="freqmode" dataType="xsd:float"
+            definition="A vibrational eigenfrequencies (cm^-1)"
+            description="need description" cmlx:superclass="freq" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.nfreqmode" term="nfreqmode" dataType="xsd:int"
+            definition="The total number of molecular vibrational frequencies"
+            description="The total number of molecular vibrational frequencies"
+            cmlx:superclass="freq" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.reducedmass" term="reducedmass" dataType="xsd:float"
+            definition="An effective mass of the molecular vibration"
+            description="The reduced mass associated with each vibrational mode of the molecule"
+            cmlx:superclass="freq" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.forceconstant" term="forceconstant" dataType="xsd:float"
+            definition="A vibrational force constant"
+            description="A force constant is the second derivative coefficient in an expansion of the molecular vibrational potential."
+            cmlx:superclass="freq" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.irintensity" term="irintensity" dataType="xsd:float"
+            definition="IR intensity (infrared intensity??)"
+            description="need description"
+            cmlx:superclass="freq" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.freqmodeeigen" term="freqmodeeigen" dataType="cml:vector"
+            definition="A vibrational eigenvector"
+            description="An eigenvector of vibrational eigenfrequency is associated with the atomic coordiates"
+            cmlx:superclass="freq" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.temperature" term="temperature" dataType="xsd:float"
+            definition="Temperature"
+            description="Temperature (K)"
+            cmlx:superclass="property" units="unitType:temperature" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.pressure" term="pressure" dataType="xsd:float"
+            definition="Pressure"
+            description="Pressure"
+            cmlx:superclass="property" units="unitType:pressure"
+            cmlx:status="unreviewed">
+        </entry>
+        <!-- energy properties -->
+        <entry id="property.cv" term="cv" dataType="xsd:float"
+            definition="Molar heat capacity at constant volume"
+            description="Cv is calculated from the partition function in link ??"
+            cmlx:superclass="property" units="unitType:molar_heat_capacity" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.cp" term="cp" dataType="xsd:float"
+            definition="Molar heat capacity at pressure volume"
+            description="Cp is calculated from the partition function in link ??"
+            cmlx:superclass="property" units="unitType:molar_heat_capacity" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.h" term="enthalpy" dataType="xsd:float"
+            definition="Enthalpy"
+            description="Enthalpy of molecule at specific temperature and pressure"
+            cmlx:superclass="property" units="unitType:molar_enthalpy" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.hf" term="hf" dataType="xsd:float"
+            definition="Enthalpy of formation at T K"
+            description="Enthalpy of formation at T K"
+            cmlx:superclass="property" units="unitType:molar_enthalpy" cmlx:status="unreviewed">
+                <parameter units="unitType:temperature"></parameter>
+        </entry>
+        <entry id="property.hf298" term="hf298" dataType="xsd:float"
+            definition="Enthalpy of formation at 298.15 K"
+            description="Enthalpy of formation at 298.15 K"
+            cmlx:superclass="property" units="unitType:molar_enthalpy" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.s" term="entropy" dataType="xsd:float"
+            definition="Entropy"
+            description="Entropy of molecule at specific temperature and pressure"
+            cmlx:superclass="property" units="unitType:molar_entropy" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.scfenergy" term="scfenergy" dataType="xsd:float"
+            definition="Self-consistent field energy of quantum calculation"
+            description="needs a description"
+            cmlx:superclass="property" units="unitType:molar_energy" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.totEE" term="totalelectronicenergy" dataType="xsd:float"
+            definition="total electronic energy"
+            description="need description"
+            cmlx:superclass="property" units="unitType:molar_energy" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.totKE" term="totalkineticenergy" dataType="xsd:float"
+            definition="total kinetic energy"
+            description="need description"
+            cmlx:superclass="property" units="unitType:molar_energy" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.totPE" term="totalpotentialenergy" dataType="xsd:float"
+            definition="total potential energy"
+            description="total potential energy"
+            cmlx:superclass="property" units="unitType:molar_energy" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.totTE" term="thermalenergy" dataType="xsd:float"
+            definition="Thermal energy of a molecule at specific temperature and pressure"
+            description="Thermal energy is a form of energy that manifests itself as an increase of temperature."
+            cmlx:superclass="property" units="unitType:molar_energy" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.zpve" term="zpve" dataType="xsd:float"
+            definition="Zero-Point Vibrational Energy (ZPVE)"
+            description="The total sum of energies of all vibrational mode of a molecule at absolute zero (0 K)."
+            cmlx:superclass="property" units="unitType:molar_energy" cmlx:status="unreviewed">
+        </entry>
+        <entry id="property.polarizability" term="polarizability" dataType="cml:array"
+            definition="Polarizability"
+            description=""
+            cmlx:superclass="property" units="unitType:xxx" cmlx:status="unreviewed">
+        </entry>
+    <!-- End Property Entries -->
+
+    </dictionary>
+</cml>
+
+
+
+
+
+
+
+
+
+
+
