@@ -5,14 +5,12 @@
 
 package org.xmlcml.cml.parsetree;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
 import nu.xom.Element;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.xmlcml.cml.parsetree.helpers.CounterMap;
 import org.xmlcml.cml.parsetree.helpers.ListMap;
@@ -24,52 +22,15 @@ import org.xmlcml.cml.parsetree.helpers.ListMap;
  */
 public class SentenceAnalyzerTest {
 
-	String[] filenames = null;
-    POSDocument[] documents = null;
-	private void makeFiles() {
-		if (filenames == null) {
-			filenames = new String[] {
-	        "src/test/resources/parsetrees/target/file1.xml",
-	        "src/test/resources/parsetrees/target/file2.xml",
-	        "src/test/resources/parsetrees/target/file3.xml",
-	        "src/test/resources/parsetrees/target/file4.xml",
-	        "src/test/resources/parsetrees/target/file5.xml",
-	        "src/test/resources/parsetrees/target/file6.xml",
-	        "src/test/resources/parsetrees/target/file7.xml",
-	        "src/test/resources/parsetrees/target/file8.xml",
-	        "src/test/resources/parsetrees/target/file9.xml",
-			};
 
-		    documents = new POSDocument[filenames.length];
-	        for (int i = 0; i < filenames.length; i++) {
-	            try {
-					documents[i] = POSDocument.parseDocument(new FileInputStream(filenames[i]));
-				} catch (FileNotFoundException e) {
-					throw new RuntimeException("Cannot read "+filenames[i]);
-				}
-	        }
+	DocumentFixture fixture;
+	@Before
+	public void setUp() {
+		if (fixture == null) {
+			fixture = new DocumentFixture();
 		}
 	}
-
-    public List<POSElement> getDocumentList() {
-    	List<POSElement> documentList = new ArrayList<POSElement>();
-    	for (POSElement document : documents) {
-    		documentList.add((POSDocument)document);
-    	}
-    	return documentList;
-    }
     
-    public List<POSElement> getSentenceList() {
-    	List<POSElement> sentenceList = new ArrayList<POSElement>();
-    	for (POSElement document : documents) {
-    		List<POSElement> sentenceListx = ((POSDocument)document).getSentenceList();
-    		for (POSElement sentence : sentenceListx) {
-    			sentenceList.add((POSSentence)sentence);
-    		}
-    	}
-    	return sentenceList;
-    }
-
     @Test
     public void testSentence() throws Exception {
     	POSSentence sentence = createSentence();
@@ -78,7 +39,7 @@ public class SentenceAnalyzerTest {
     }
 
 	private POSSentence createSentence() {
-		POSDocument document = documents[0];
+		POSDocument document = fixture.documents[0];
         POSSentence sentence = (POSSentence) document.getSentenceList().get(0);
 		return sentence;
 	}
@@ -144,7 +105,7 @@ public class SentenceAnalyzerTest {
     @Test
     public void testMapLeafContentToNodeNameAllSentences() {
         SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        List<POSElement> sentenceList = getSentenceList();
+        List<POSElement> sentenceList = fixture.getSentenceList();
         ListMap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(sentenceList);
         listMap.printWithCounts();
     }
@@ -152,7 +113,7 @@ public class SentenceAnalyzerTest {
     @Test
     public void testMapLeafContentToNodeNameAllDocuments() {
         SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        List<POSElement> documentList = getDocumentList();
+        List<POSElement> documentList = fixture.getDocumentList();
         ListMap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(documentList);
         Assert.assertNotNull(listMap);
         listMap.printWithCounts();
@@ -170,7 +131,7 @@ public class SentenceAnalyzerTest {
     @Test
     public void testMapNonLeafContentToNodeNameAllSentences() {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        List<POSElement> sentenceList = getSentenceList();
+        List<POSElement> sentenceList = fixture.getSentenceList();
         ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(sentenceList);
         Assert.assertNotNull(listMap);
         listMap.printWithCounts();
@@ -179,7 +140,7 @@ public class SentenceAnalyzerTest {
     @Test
     public void testMapNonLeafContentToNodeNameAllDocuments() {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        List<POSElement> documentList = getDocumentList();
+        List<POSElement> documentList = fixture.getDocumentList();
         ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(documentList);
         Assert.assertNotNull(listMap);
         listMap.printWithCounts();
