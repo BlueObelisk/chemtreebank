@@ -29,7 +29,7 @@ public class DocumentFixture {
 	            try {
 					documents[i] = POSDocument.parseDocument(this.getClass().getClassLoader().getResourceAsStream(filenames[i]));
 				} catch (Exception e) {
-					throw new RuntimeException("Cannot read "+filenames[i]);
+					throw new RuntimeException("Cannot read "+filenames[i], e);
 				}
 	        }
 		}
