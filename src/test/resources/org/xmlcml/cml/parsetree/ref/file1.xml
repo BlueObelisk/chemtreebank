@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns:cml="http://www.xml-cml.org/schema" xmlns:units="http://www.xml-cml.org/units">
+  <Sentence sf="A solution of 124C ( 7.0 g , 32.4 mmol ) in concentrate H2SO4 ( 9.5 mL ) was added to a solution of concentrate H2SO4 ( 9.5 mL ) and fuming HNO3 ( 13 mL ) and">
+    <NounPhrase sf="A solution of 124C ( 7.0 g , 32.4 mmol )">
+      <DT sf="A">A</DT>
+      <NN sf="solution" role="CHEMENTITY">solution</NN>
+      <PrepPhrase sf="of 124C ( 7.0 g , 32.4 mmol )">
+        <IN sf="of" role="OF">of</IN>
+        <NounPhrase sf="124C ( 7.0 g , 32.4 mmol )">
+          <NN sf="124C ( 7.0 g , 32.4 mmol )" role="MOLECULE">
+            <molecule xmlns="http://www.xml-cml.org/schema">
+              <name>124C</name>
+              <amount role="MASS">
+                <scalar dataType="xsd:double" units="units:g">7.0</scalar>
+              </amount>
+              <amount role="AMOUNT">
+                <scalar dataType="xsd:double" units="units:mmol">32.4</scalar>
+              </amount>
+            </molecule>
+          </NN>
+        </NounPhrase>
+      </PrepPhrase>
+    </NounPhrase>
+    <PrepPhrase sf="in concentrate H2SO4 ( 9.5 mL )">
+      <IN sf="in" role="IN">in</IN>
+      <NounPhrase sf="concentrate H2SO4 ( 9.5 mL )">
+        <JJ sf="concentrate">concentrate</JJ>
+        <NN sf="H2SO4 ( 9.5 mL )" role="MOLECULE">
+          <molecule xmlns="http://www.xml-cml.org/schema">
+            <formula concise="H 2 O 4 S 1">
+              <atomArray elementType="H O S" count="2.0 4.0 1.0"/>
+            </formula>
+            <name>H2SO4</name>
+            <amount role="VOLUME">
+              <scalar dataType="xsd:double" units="units:mL">9.5</scalar>
+            </amount>
+          </molecule>
+        </NN>
+      </NounPhrase>
+    </PrepPhrase>
+    <VerbPhrase sf="was added to a solution of concentrate H2SO4 ( 9.5 mL ) and fuming HNO3 ( 13 mL )">
+      <VB sf="was" tense="PAST" role="ADD">was added</VB>
+      <PrepPhrase sf="to a solution of concentrate H2SO4 ( 9.5 mL ) and fuming HNO3 ( 13 mL )">
+        <IN sf="to" role="TO">to</IN>
+        <NounPhrase sf="a solution of concentrate H2SO4 ( 9.5 mL ) and fuming HNO3 ( 13 mL )">
+          <DT sf="a">a</DT>
+          <NN sf="solution" role="CHEMENTITY">solution</NN>
+          <PrepPhrase sf="of concentrate H2SO4 ( 9.5 mL ) and fuming HNO3 ( 13 mL )">
+            <IN sf="of" role="OF">of</IN>
+            <NounPhrase sf="concentrate H2SO4 ( 9.5 mL ) and fuming HNO3 ( 13 mL )">
+              <JJ sf="concentrate">concentrate</JJ>
+              <NN sf="H2SO4 ( 9.5 mL )" role="MOLECULE">
+                <molecule xmlns="http://www.xml-cml.org/schema">
+                  <formula concise="H 2 O 4 S 1">
+                    <atomArray elementType="H O S" count="2.0 4.0 1.0"/>
+                  </formula>
+                  <name>H2SO4</name>
+                  <amount role="VOLUME">
+                    <scalar dataType="xsd:double" units="units:mL">9.5</scalar>
+                  </amount>
+                </molecule>
+              </NN>
+              <CC sf="and" role="CC">and</CC>
+              <JJ sf="fuming">fuming</JJ>
+              <NN sf="HNO3 ( 13 mL )" role="MOLECULE">
+                <molecule xmlns="http://www.xml-cml.org/schema">
+                  <formula concise="H 1 N 1 O 3">
+                    <atomArray elementType="H N O" count="1.0 1.0 3.0"/>
+                  </formula>
+                  <name>HNO3</name>
+                  <amount role="VOLUME">
+                    <scalar dataType="xsd:double" units="units:mL">13.0</scalar>
+                  </amount>
+                </molecule>
+              </NN>
+            </NounPhrase>
+          </PrepPhrase>
+        </NounPhrase>
+      </PrepPhrase>
+    </VerbPhrase>
+    <CC sf="and" role="CC">and</CC>
+  </Sentence>
+  <Sentence sf="the mixture was heated at 60Â°C for 30 min .">
+    <NounPhrase sf="the mixture">
+      <DT sf="the">the</DT>
+      <NN sf="mixture" role="CHEMENTITY">mixture</NN>
+    </NounPhrase>
+    <VerbPhrase sf="was heated at 60Â°C for 30 min">
+      <VB sf="was" tense="PAST" role="HEAT">was heated</VB>
+      <TempPhrase sf="at 60Â°C">
+        <IN sf="at" role="IN">at</IN>
+        <NN sf="60Â°C" role="TEMP">60 degC</NN>
+      </TempPhrase>
+      <TimePhrase sf="for 30 min">
+        <IN sf="for" role="FOR">for</IN>
+        <scalar dataType="xsd:double" units="units:minute" xmlns="http://www.xml-cml.org/schema">30.0</scalar>
+      </TimePhrase>
+    </VerbPhrase>
+    <Punct sf="." role="STOP">.</Punct>
+  </Sentence>
+  <Sentence sf="After cooling to room temperature , the reaction mixture was added to iced 6M solution of NaOH ( 150 mL ) and">
+    <VerbPhrase sf="After cooling to room temperature">
+      <IN sf="After" role="AFTER">After</IN>
+      <VB sf="cooling" role="COOL">cooling</VB>
+      <TempPhrase sf="to room temperature">
+        <IN sf="to" role="TO">to</IN>
+        <scalar dataType="xsd:double" units="units:celsius" xmlns="http://www.xml-cml.org/schema">20.0</scalar>
+      </TempPhrase>
+    </VerbPhrase>
+    <Unmatched sf=",">
+      <Punct sf="," role="COMMA">,</Punct>
+    </Unmatched>
+    <NounPhrase sf="the reaction mixture">
+      <DT sf="the">the</DT>
+      <NN sf="reaction" role="CHEMENTITY">reaction mixture</NN>
+    </NounPhrase>
+    <VerbPhrase sf="was added to iced 6M solution of NaOH ( 150 mL )">
+      <VB sf="was" tense="PAST" role="ADD">was added</VB>
+      <PrepPhrase sf="to iced 6M solution of NaOH ( 150 mL )">
+        <IN sf="to" role="TO">to</IN>
+        <NounPhrase sf="iced 6M solution of NaOH ( 150 mL )">
+          <JJ sf="iced">iced</JJ>
+          <NN sf="6M" role="MOLECULE">
+            <molecule xmlns="http://www.xml-cml.org/schema">
+              <name>6M</name>
+            </molecule>
+          </NN>
+          <NN sf="solution" role="CHEMENTITY">solution</NN>
+          <PrepPhrase sf="of NaOH ( 150 mL )">
+            <IN sf="of" role="OF">of</IN>
+            <NounPhrase sf="NaOH ( 150 mL )">
+              <NN sf="NaOH ( 150 mL )" role="MOLECULE">
+                <molecule xmlns="http://www.xml-cml.org/schema">
+                  <formula concise="H 1 Na 1 O 1">
+                    <atomArray elementType="H Na O" count="1.0 1.0 1.0"/>
+                  </formula>
+                  <name>NaOH</name>
+                  <amount role="VOLUME">
+                    <scalar dataType="xsd:double" units="units:mL">150.0</scalar>
+                  </amount>
+                </molecule>
+              </NN>
+            </NounPhrase>
+          </PrepPhrase>
+        </NounPhrase>
+      </PrepPhrase>
+    </VerbPhrase>
+    <CC sf="and" role="CC">and</CC>
+  </Sentence>
+  <Sentence sf="neutralized to pH 6 with 1N NaOH solution .">
+    <VerbPhrase sf="neutralized to pH 6 with 1N NaOH solution">
+      <VB sf="neutralized" role="VBN">neutralized</VB>
+      <PrepPhrase sf="to pH 6">
+        <IN sf="to" role="TO">to</IN>
+        <NounPhrase sf="pH 6">
+          <NN sf="pH" role="CHEMENTITY">pH</NN>
+          <Number sf="6">6</Number>
+        </NounPhrase>
+      </PrepPhrase>
+      <PrepPhrase sf="with 1N NaOH solution">
+        <IN sf="with" role="WITH">with</IN>
+        <NounPhrase sf="1N NaOH solution">
+          <NN sf="1N NaOH" role="MOLECULE">
+            <molecule xmlns="http://www.xml-cml.org/schema">
+              <name>1N NaOH</name>
+            </molecule>
+          </NN>
+          <NN sf="solution" role="CHEMENTITY">solution</NN>
+        </NounPhrase>
+      </PrepPhrase>
+    </VerbPhrase>
+    <Punct sf="." role="STOP">.</Punct>
+  </Sentence>
+  <Sentence sf="The reaction mixture was extracted with dichloromethane ( 4x100 mL ) .">
+    <NounPhrase sf="The reaction mixture">
+      <DT sf="The">The</DT>
+      <NN sf="reaction" role="CHEMENTITY">reaction mixture</NN>
+    </NounPhrase>
+    <VerbPhrase sf="was extracted with dichloromethane ( 4x100 mL )">
+      <VB sf="was" tense="PAST" role="EXTRACT">was extracted</VB>
+      <PrepPhrase sf="with dichloromethane ( 4x100 mL )">
+        <IN sf="with" role="WITH">with</IN>
+        <NounPhrase sf="dichloromethane ( 4x100 mL )">
+          <NN sf="dichloromethane ( 4x100 mL )" role="MOLECULE">
+            <molecule xmlns="http://www.xml-cml.org/schema">
+              <formula inline="ClCCl" convention="SMILES"/>
+              <name>dichloromethane</name>
+              <amount role="VOLUME">
+                <scalar dataType="xsd:double" units="units:mL">400.0</scalar>
+              </amount>
+            </molecule>
+          </NN>
+        </NounPhrase>
+      </PrepPhrase>
+    </VerbPhrase>
+    <Punct sf="." role="STOP">.</Punct>
+  </Sentence>
+  <Sentence sf="The combined organic phases were dried over Na2SO4 , filtered and">
+    <NounPhrase sf="The combined organic phases">
+      <DT sf="The">The</DT>
+      <JJ sf="combined" role="OSCAR-CJ">combined</JJ>
+      <JJ sf="organic" role="OSCAR-CJ">organic</JJ>
+      <NNS sf="phases">phases</NNS>
+    </NounPhrase>
+    <VerbPhrase sf="were dried over Na2SO4">
+      <VB sf="were" tense="PAST" role="DRY">were dried</VB>
+      <PrepPhrase sf="over Na2SO4">
+        <IN sf="over" role="OVER">over</IN>
+        <NounPhrase sf="Na2SO4">
+          <NN sf="Na2SO4" role="MOLECULE">
+            <molecule xmlns="http://www.xml-cml.org/schema">
+              <formula concise="Na 2 O 4 S 1">
+                <atomArray elementType="Na O S" count="2.0 4.0 1.0"/>
+              </formula>
+              <name>Na2SO4</name>
+            </molecule>
+          </NN>
+        </NounPhrase>
+      </PrepPhrase>
+    </VerbPhrase>
+    <Unmatched sf=",">
+      <Punct sf="," role="COMMA">,</Punct>
+    </Unmatched>
+    <VerbPhrase sf="filtered">
+      <VB sf="filtered" role="FILTER">filtered</VB>
+    </VerbPhrase>
+    <CC sf="and" role="CC">and</CC>
+  </Sentence>
+  <Sentence sf="concentrated to give 124D as a solid .">
+    <VerbPhrase sf="concentrated">
+      <VB sf="concentrated" role="CONCENTRATE">concentrated</VB>
+    </VerbPhrase>
+    <VerbPhrase sf="to give">
+      <IN sf="to" role="TO">to</IN>
+      <VB sf="give" role="YIELD">give</VB>
+    </VerbPhrase>
+    <NounPhrase sf="124D">
+      <NN sf="124D" role="MOLECULE">
+        <molecule xmlns="http://www.xml-cml.org/schema">
+          <name>124D</name>
+        </molecule>
+      </NN>
+    </NounPhrase>
+    <PrepPhrase sf="as a solid">
+      <IN sf="as" role="AS">as</IN>
+      <NounPhrase sf="a solid">
+        <DT sf="a">a</DT>
+        <NN sf="solid" role="STATE">solid</NN>
+      </NounPhrase>
+    </PrepPhrase>
+    <Punct sf="." role="STOP">.</Punct>
+  </Sentence>
+</Document>
