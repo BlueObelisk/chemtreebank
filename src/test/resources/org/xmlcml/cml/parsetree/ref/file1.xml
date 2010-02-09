@@ -80,16 +80,16 @@
     </VerbPhrase>
     <CC sf="and" role="CC">and</CC>
   </Sentence>
-  <Sentence sf="the mixture was heated at 60Â°C for 30 min .">
+  <Sentence sf="the mixture was heated at 60 C for 30 min .">
     <NounPhrase sf="the mixture">
       <DT sf="the">the</DT>
       <NN sf="mixture" role="CHEMENTITY">mixture</NN>
     </NounPhrase>
-    <VerbPhrase sf="was heated at 60Â°C for 30 min">
+    <VerbPhrase sf="was heated at 60 C for 30 min">
       <VB sf="was" tense="PAST" role="HEAT">was heated</VB>
-      <TempPhrase sf="at 60Â°C">
+      <TempPhrase sf="at 60 C">
         <IN sf="at" role="IN">at</IN>
-        <NN sf="60Â°C" role="TEMP">60 degC</NN>
+        <NN sf="60 C" role="TEMP">60 C</NN>
       </TempPhrase>
       <TimePhrase sf="for 30 min">
         <IN sf="for" role="FOR">for</IN>
