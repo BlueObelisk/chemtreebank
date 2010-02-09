@@ -96,7 +96,7 @@
 			<VB-HEAT>heated</VB-HEAT>
 			<TempPhrase>
 				<IN>at</IN>
-				<NN-TEMP>60°C</NN-TEMP>
+				<NN-TEMP>60 C</NN-TEMP>
 			</TempPhrase>
 			<TimePhrase>
 				<IN-FOR>for</IN-FOR>
