@@ -5,8 +5,6 @@
 
 package org.xmlcml.cml.parsetree;
 
-import java.util.List;
-
 import nu.xom.Element;
 
 import org.junit.Assert;
@@ -14,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xmlcml.cml.parsetree.helpers.CounterMap;
 import org.xmlcml.cml.parsetree.helpers.ListMap;
+import org.xmlcml.cml.testutil.JumboTestUtils;
 
 
 /**
@@ -24,6 +23,7 @@ public class SentenceAnalyzerTest {
 
 
 	DocumentFixture fixture;
+	
 	@Before
 	public void setUp() {
 		if (fixture == null) {
@@ -33,17 +33,11 @@ public class SentenceAnalyzerTest {
     
     @Test
     public void testSentence() throws Exception {
-    	POSSentence sentence = createSentence();
-        Assert.assertNotNull(sentence);
-        Assert.assertEquals("Nodes", 4, sentence.getChildElements().size());
+        Assert.assertEquals("Nodes", 4, fixture.sentence.getChildElements().size());
+		Element ref = JumboTestUtils.parseValidFile(fixture.refdir+"/file1.xml");
+		JumboTestUtils.assertEqualsIncludingFloat("document", ref, fixture.document, true, 0.000001);
     }
 
-	private POSSentence createSentence() {
-		POSDocument document = fixture.documents[0];
-        POSSentence sentence = (POSSentence) document.getSentenceList().get(0);
-		return sentence;
-	}
-    
 //
 //    @Test
 //    public void testIndexHash() throws Exception {
@@ -55,8 +49,7 @@ public class SentenceAnalyzerTest {
     @Test
     public void testGetNodeIndex() throws Exception {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-    	POSSentence posSentence = createSentence();
-        CounterMap<POSElement> counterMap = sentenceAnalyzer.getNodeIndex(posSentence);
+        CounterMap<POSElement> counterMap = sentenceAnalyzer.getNodeIndex(fixture.sentence);
         System.out.println("CC "+counterMap.size());
         for (POSElement pn : counterMap.keySet()) {
             Integer count = counterMap.getCount(pn);
@@ -97,33 +90,21 @@ public class SentenceAnalyzerTest {
     @Test
     public void testMapLeafContentToNodeName() {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-    	POSSentence posSentence = createSentence();
-        ListMap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(posSentence);
+        ListMap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(fixture.sentence);
         listMap.printWithCounts();
     }
 
     @Test
     public void testMapLeafContentToNodeNameAllSentences() {
         SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        List<POSElement> sentenceList = fixture.getSentenceList();
-        ListMap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(sentenceList);
-        listMap.printWithCounts();
-    }
-    
-    @Test
-    public void testMapLeafContentToNodeNameAllDocuments() {
-        SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        List<POSElement> documentList = fixture.getDocumentList();
-        ListMap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(documentList);
-        Assert.assertNotNull(listMap);
+        ListMap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(fixture.sentenceList);
         listMap.printWithCounts();
     }
     
     @Test
     public void testMapNonLeafContentToNodeNameSingleSentence() {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-    	POSSentence posSentence = createSentence();
-        ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(posSentence);
+        ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(fixture.sentence);
         Assert.assertNotNull(listMap);
         listMap.printWithCounts();
     }
@@ -131,17 +112,7 @@ public class SentenceAnalyzerTest {
     @Test
     public void testMapNonLeafContentToNodeNameAllSentences() {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        List<POSElement> sentenceList = fixture.getSentenceList();
-        ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(sentenceList);
-        Assert.assertNotNull(listMap);
-        listMap.printWithCounts();
-    }
-
-    @Test
-    public void testMapNonLeafContentToNodeNameAllDocuments() {
-    	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        List<POSElement> documentList = fixture.getDocumentList();
-        ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(documentList);
+        ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(fixture.sentenceList);
         Assert.assertNotNull(listMap);
         listMap.printWithCounts();
     }
