@@ -67,6 +67,8 @@ public class POSNounPhrase extends POSPhrase {
 		/*
         <Number surface="18">18</Number>
         <NN surface="hrs." role="TIME">hrs.</NN>
+        ==>
+        <scalar dataType="xsd:double" units="unit:hour">18</scalar>
 		 */
 		List<Element> neighbours = TreeBankUtil.getConsecutiveSiblings(this, new String[] {"Number", "NN"});
 		if (neighbours != null) {
@@ -86,23 +88,18 @@ public class POSNounPhrase extends POSPhrase {
 			number.detach();
 			unit.detach();
 			this.addAttribute(new Attribute(PHRASE, type.toString()));
-//			if (type.equals(Type.TIME)) {
-//				copyChildrenAndReplaceParent(new POSTimePhrase(this.rawElement));
-//			} else if (type.equals(Type.TEMPERATURE)) {
-//				copyChildrenAndReplaceParent(new POSTempPhrase(this.rawElement));
-//			}
 		}
 	}
 
 
-	private void copyChildrenAndReplaceParent(POSElement phrase) {
-		Elements childElements = this.getChildElements();
-		for (int i = 0; i < childElements.size(); i++) {
-			childElements.get(i).detach();
-			phrase.appendChild(childElements.get(i));
-		}
-		this.getParent().replaceChild(this, phrase);
-	}
+//	private void copyChildrenAndReplaceParent(POSElement phrase) {
+//		Elements childElements = this.getChildElements();
+//		for (int i = 0; i < childElements.size(); i++) {
+//			childElements.get(i).detach();
+//			phrase.appendChild(childElements.get(i));
+//		}
+//		this.getParent().replaceChild(this, phrase);
+//	}
 
 	private void createMoleculeList() {
 		/*
