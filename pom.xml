@@ -34,19 +34,16 @@
 			<artifactId>junit</artifactId>
 			<version>4.0</version>
 			<scope>test</scope>
-			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>xom</groupId>
 			<artifactId>xom</artifactId>
 			<version>1.1</version>
-			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>cml</groupId>
 			<artifactId>cmlxom</artifactId>
 			<version>2.5.1-SNAPSHOT</version>
-			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
