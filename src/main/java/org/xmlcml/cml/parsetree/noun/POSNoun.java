@@ -5,16 +5,11 @@
 
 package org.xmlcml.cml.parsetree.noun;
 
-import java.util.List;
-
 import nu.xom.Element;
 
 import org.apache.log4j.Logger;
 import org.xmlcml.cml.parsetree.POSElement;
-import org.xmlcml.cml.parsetree.helpers.NumberHelper;
-import org.xmlcml.cml.parsetree.helpers.TreeBankUtil;
 import org.xmlcml.cml.parsetree.helpers.Units;
-import org.xmlcml.cml.parsetree.helpers.Units.Type;
 
 /**
  *
@@ -27,7 +22,6 @@ public class POSNoun extends POSElement {
 	public static final String PREFIX = TAG+"-";
 
 	public static final String NUMBER = "NUMBER";
-
 	public static final String PLURAL = "PLURAL";
 
 	public POSNoun(Element element) {
@@ -41,6 +35,10 @@ public class POSNoun extends POSElement {
     }
 
 	private void tidy() {
+		String content = this.getValue();
+		if ("x".equals(content) || "×".equals(content)) {
+			this.setRole(Units.TIMES.toString());
+		}
 	}
 
     

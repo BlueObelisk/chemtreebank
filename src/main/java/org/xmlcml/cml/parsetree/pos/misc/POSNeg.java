@@ -11,15 +11,15 @@ import org.apache.log4j.Logger;
 import org.xmlcml.cml.parsetree.POSElement;
 
 /**
- *
+ * negative
  * @author pm286
  */
-public class POSCc extends POSElement {
-	private static Logger LOG = Logger.getLogger(POSCc.class);
+public class POSNeg extends POSElement {
+	private static Logger LOG = Logger.getLogger(POSNeg.class);
 
-	public final static String TAG = "CC";
+	public final static String TAG = "NEG";
 
-    public POSCc(Element element) {
+    public POSNeg(Element element) {
     	super(TAG, element);
     	this.setRole(TAG);
     }

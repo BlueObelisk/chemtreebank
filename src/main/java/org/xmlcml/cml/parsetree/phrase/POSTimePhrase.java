@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 import org.xmlcml.cml.parsetree.POSElement;
 import org.xmlcml.cml.parsetree.helpers.TreeBankUtil;
 import org.xmlcml.cml.parsetree.helpers.Units;
-import org.xmlcml.cml.parsetree.helpers.Units.Name;
 
 /**
  *
@@ -46,7 +45,7 @@ public class POSTimePhrase extends POSElement {
 	private void replaceNonNumericPhrases() {
 		Nodes rt = this.query("NN[.='overnight']");
 		if (rt.size() == 1) {
-			TreeBankUtil.replaceStringContainerByScalar((Element)rt.get(0), OVERNIGHT, Name.HOUR);
+			TreeBankUtil.replaceStringContainerByScalar((Element)rt.get(0), OVERNIGHT, Units.HOUR);
 		}
 	}
 

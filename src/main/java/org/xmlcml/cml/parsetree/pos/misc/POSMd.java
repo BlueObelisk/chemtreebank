@@ -11,15 +11,15 @@ import org.apache.log4j.Logger;
 import org.xmlcml.cml.parsetree.POSElement;
 
 /**
- *
+ * modifier? ("ca")
  * @author pm286
  */
-public class POSCc extends POSElement {
-	private static Logger LOG = Logger.getLogger(POSCc.class);
+public class POSMd extends POSElement {
+	private static Logger LOG = Logger.getLogger(POSMd.class);
 
-	public final static String TAG = "CC";
+	public final static String TAG = "MD";
 
-    public POSCc(Element element) {
+    public POSMd(Element element) {
     	super(TAG, element);
     	this.setRole(TAG);
     }

@@ -19,16 +19,15 @@ import org.xmlcml.cml.element.CMLMoleculeList;
 import org.xmlcml.cml.parsetree.punct.POSPunct;
 
 /**
- *
+ * compound reference
  * @author pm286
  */
-public class POSOscarCM extends POSNoun {
-	private static Logger LOG = Logger.getLogger(POSOscarCM.class);
+public class POSOscarCPR extends POSNoun {
+	private static Logger LOG = Logger.getLogger(POSOscarCPR.class);
 
-	public final static String TAG = "OSCAR-CM";
-	public final static String TAG1 = "OSCARCM";
+	public final static String TAG = "OSCAR-CPR";
 
-    public POSOscarCM(Element element) {
+    public POSOscarCPR(Element element) {
     	super(element, TAG);
     	tidy();
     }
@@ -60,7 +59,7 @@ public class POSOscarCM extends POSNoun {
 //				LOG.error("non-OSCAR-CML/Punct nodes in "+this.toXML());
 			} else {
 //				CMLUtil.debug(this, "XXXXXXXX ");
-				List<POSOscarCM> oscarList = new ArrayList<POSOscarCM>();
+				List<POSOscarCPR> oscarList = new ArrayList<POSOscarCPR>();
 				oscarList = extractOddNodesAsOSCARCM(childElements, oscarList);
 				if (oscarList != null) {
 					createAndAddMoleculeList(oscarList);
@@ -69,16 +68,16 @@ public class POSOscarCM extends POSNoun {
 		}
     }
 
-	private List<POSOscarCM> extractOddNodesAsOSCARCM(Elements childElements,
-			List<POSOscarCM> oscarList) {
+	private List<POSOscarCPR> extractOddNodesAsOSCARCM(Elements childElements,
+			List<POSOscarCPR> oscarList) {
 		int i = 0;
 		while (i < childElements.size()) {
-			if (!(childElements.get(i) instanceof POSOscarCM)) {
+			if (!(childElements.get(i) instanceof POSOscarCPR)) {
 				oscarList = null;
 //				LOG.error("Not an OSCAR-CM: "+childElements.get(i)+" "+i);
 				break;
 			}
-			oscarList.add((POSOscarCM)childElements.get(i));
+			oscarList.add((POSOscarCPR)childElements.get(i));
 			i++;
 			if (i >= childElements.size()) {
 				break;
@@ -94,9 +93,9 @@ public class POSOscarCM extends POSNoun {
 		return oscarList;
 	}
 
-	private void createAndAddMoleculeList(List<POSOscarCM> oscarList) {
+	private void createAndAddMoleculeList(List<POSOscarCPR> oscarList) {
 		CMLMoleculeList moleculeList = new CMLMoleculeList();
-		for (POSOscarCM oscar : oscarList) {
+		for (POSOscarCPR oscar : oscarList) {
 			oscar.detach();
 			CMLMolecule molecule = new CMLMolecule();
 			molecule.addName(oscar.getValue());

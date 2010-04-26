@@ -5,7 +5,6 @@
 
 package org.xmlcml.cml.parsetree.pos.misc;
 
-import nu.xom.Attribute;
 import nu.xom.Element;
 
 import org.apache.log4j.Logger;

@@ -11,7 +11,6 @@ import java.util.Map;
 import nu.xom.Element;
 
 import org.apache.log4j.Logger;
-import org.xmlcml.cml.parsetree.POSException;
 
 /**
  * represents a number
@@ -47,7 +46,8 @@ public class NumberHelper  extends Helper {
 	    		}
 	    	}
 	    	if (number == null) {
-	    		throw new POSException("Cannot parse number: "+numberString);
+	    		number = Double.NaN;
+//	    		throw new POSException("Cannot parse number: "+numberString);
 	    	}
 		}
 	    

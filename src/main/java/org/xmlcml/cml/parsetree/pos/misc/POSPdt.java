@@ -11,17 +11,16 @@ import org.apache.log4j.Logger;
 import org.xmlcml.cml.parsetree.POSElement;
 
 /**
- *
+ * "half"
  * @author pm286
  */
-public class POSCc extends POSElement {
-	private static Logger LOG = Logger.getLogger(POSCc.class);
+public class POSPdt extends POSElement {
+	private static Logger LOG = Logger.getLogger(POSPdt.class);
 
-	public final static String TAG = "CC";
+	public final static String TAG = "PDT";
 
-    public POSCc(Element element) {
+    public POSPdt(Element element) {
     	super(TAG, element);
-    	this.setRole(TAG);
     }
 
 }
