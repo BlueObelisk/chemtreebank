@@ -7,14 +7,17 @@ package org.xmlcml.cml.parsetree.phrase;
 
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import nu.xom.Attribute;
 import nu.xom.Element;
-import nu.xom.Elements;
 import nu.xom.Nodes;
 
 import org.apache.log4j.Logger;
 import org.xmlcml.cml.base.CMLConstants;
+import org.xmlcml.cml.base.CMLUtil;
+import org.xmlcml.cml.element.CMLFormula;
 import org.xmlcml.cml.element.CMLMolecule;
 import org.xmlcml.cml.element.CMLMoleculeList;
 import org.xmlcml.cml.element.CMLScalar;
@@ -56,12 +59,48 @@ public class POSNounPhrase extends POSPhrase {
      */
     private void tidy() {
     	interpretNumberedQuantity();
+    	elementalAnalysis();
     	concatenateCompoundNouns();
     	concatenateAdjectiveNoun();
     	concatenateDegrees();
     	createScalars();
     	createMoleculeList();
     }
+
+    String ELEMENTAL_PATTERN0_S = "([A-Z][a-z]?)\\s+(\\d+\\.\\d+)\\s*\\%?\\s*\\,?\\s*";
+    Pattern ELEMENTAL_PATTERN0 = Pattern.compile("("+ELEMENTAL_PATTERN0_S+")(.*)");
+    Pattern ELEMENTAL_PATTERN = Pattern.compile("(found|calc(ulate)?d?):?\\s+(("+ELEMENTAL_PATTERN0_S+")+)\\s*");
+	private void elementalAnalysis() {
+		String sf = this.getAttributeValue(SURFACE).trim();
+		if (sf.startsWith("found:") && sf.endsWith("%")) {
+			Matcher matcher = ELEMENTAL_PATTERN.matcher(sf);
+			if (matcher.matches()) {
+				String elements = matcher.group(3).trim();
+				String found = matcher.group(1).trim();
+				StringBuilder conciseSb = new StringBuilder();
+				while (elements.length() > 0) {
+					Matcher matcher0 = ELEMENTAL_PATTERN0.matcher(elements);
+					if (!matcher0.matches()) {
+						throw new RuntimeException("bad match: "+elements);
+					}
+//					String elementNumber = matcher0.group(1).trim();
+					String element = matcher0.group(2).trim();
+					String count = matcher0.group(3).trim();
+					conciseSb.append(element);
+					conciseSb.append(" ");
+					conciseSb.append(count);
+					conciseSb.append(" ");
+					elements = matcher0.group(4).trim();
+				}
+				String concise = conciseSb.substring(0, conciseSb.length()-1).toString();
+				CMLFormula formula = new CMLFormula();
+				formula.setInline(concise);
+				formula.setConvention("cmlx:element_"+found);
+				this.removeChildren();
+				this.appendChild(formula);
+			}
+		}
+	}
 
 	private void interpretNumberedQuantity() {
 		/*
@@ -78,16 +117,30 @@ public class POSNounPhrase extends POSPhrase {
 			if (d == null) {
 				throw new POSException("Unknown number: "+number.getValue());
 			}
-			Units units = Units.guessUnits(unit.getValue());
-			if (units == null) {
-				throw new POSException("Unknown units: "+unit.getValue());
+			List<Units> unitList = Units.getPossibleUnits(unit.getValue());
+			if (unitList.size() == 0) {
+				Double dd = null;
+				try {
+					dd = new Double(unit.getValue());
+				} catch (Exception e) {
+					//
+				}
+				if (dd != null) {
+					// bug in element percentages
+				} else {
+					LOG.error("Unknown units: "+unit.getValue());
+				}
+			} else if (unitList.size() > 1) {
+				LOG.error("Ambiguous units: "+unit.getValue());
+			} else {
+				Units units = unitList.get(0);
+				Type type = units.getType();
+				CMLScalar scalar = TreeBankUtil.createScalar(d, units);
+				this.appendChild(scalar);
+				number.detach();
+				unit.detach();
+				this.addAttribute(new Attribute(PHRASE, type.toString()));
 			}
-			Type type = units.getType();
-			CMLScalar scalar = TreeBankUtil.createScalar(d, units);
-			this.appendChild(scalar);
-			number.detach();
-			unit.detach();
-			this.addAttribute(new Attribute(PHRASE, type.toString()));
 		}
 	}
 
@@ -275,4 +328,75 @@ public class POSNounPhrase extends POSPhrase {
 			this.setRole(POSTempPhrase.TAG);
 		}
 	}
+
+	// elemental analysis
+	/*
+<NounPhrase sf="found: C 53.58 , H 5.55 , N 23.51 %">
+ <Number sf="found:">found:</Number>
+ <NNP sf="C">C</NNP>
+ <NN sf="53.58" role="UNNAMEDMOLECULE">
+   <molecule xmlns="http://www.xml-cml.org/schema">
+     <name>53.58</name>
+   </molecule>
+   <molecule ref="53.58" xmlns="http://www.xml-cml.org/schema"/>
+ </NN>
+ <Punct sf="," role="COMMA">,</Punct>
+ <NN sf="H" role="MOLECULE">
+   <molecule xmlns="http://www.xml-cml.org/schema">
+     <formula concise="H 1">
+       <atomArray elementType="H" count="1.0"/>
+     </formula>
+     <name>H</name>
+   </molecule>
+ </NN>
+ <NN sf="5.55" role="UNNAMEDMOLECULE">
+   <molecule xmlns="http://www.xml-cml.org/schema">
+     <name>5.55</name>
+   </molecule>
+   <molecule ref="5.55" xmlns="http://www.xml-cml.org/schema"/>
+ </NN>
+ <Punct sf="," role="COMMA">,</Punct>
+ <NN sf="N 23.51 %" role="MOLECULE">
+   <NN sf="23.51 %" role="QUANTITY">
+     <NN sf="23.51 %" role="PERCENT">
+       <Number sf="23.51">23.51</Number>
+       <NN sf="%" role="PERCENT">%</NN>
+     </NN>
+   </NN>
+   <molecule xmlns="http://www.xml-cml.org/schema">
+     <formula concise="N 1">
+       <atomArray elementType="N" count="1.0"/>
+     </formula>
+     <name>N</name>
+   </molecule>
+ </NN>
+</NounPhrase>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<NounPhrase sf="found: C 41.10 , H 3.90 %">
+ <Number sf="found:">found:</Number>
+ <NNP sf="C">C</NNP>
+ <NN sf="41.10" role="UNNAMEDMOLECULE">
+   <molecule xmlns="http://www.xml-cml.org/schema">
+     <name>41.10</name>
+   </molecule>
+   <molecule ref="41.10" xmlns="http://www.xml-cml.org/schema"/>
+ </NN>
+ <Punct sf="," role="COMMA">,</Punct>
+ <NN sf="H 3.90 %" role="MOLECULE">
+   <NN sf="3.90 %" role="QUANTITY">
+     <NN sf="3.90 %" role="PERCENT">
+       <Number sf="3.90">3.90</Number>
+       <NN sf="%" role="PERCENT">%</NN>
+     </NN>
+   </NN>
+   <molecule xmlns="http://www.xml-cml.org/schema">
+     <formula concise="H 1">
+       <atomArray elementType="H" count="1.0"/>
+     </formula>
+     <name>H</name>
+   </molecule>
+ </NN>
+</NounPhrase>
+	 */
 }

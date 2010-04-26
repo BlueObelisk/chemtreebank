@@ -12,7 +12,9 @@ import nu.xom.Elements;
 import nu.xom.Nodes;
 
 import org.xmlcml.cml.parsetree.helpers.CounterMap;
-import org.xmlcml.cml.parsetree.helpers.ListMap;
+
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 
 /**
  *
@@ -42,28 +44,28 @@ public class SentenceAnalyzer {
 		this.stripSf = stripSf;
 	}
 
-    public ListMap<String, String> mapLeafContentToNodeName(POSElement posElement) {
-        ListMap<String, String> nodeNameContentMap = new ListMap<String, String>();
+    public ListMultimap<String, String> mapLeafContentToNodeName(POSElement posElement) {
+        ListMultimap<String, String> nodeNameContentMap = ArrayListMultimap.create();
         Nodes nodes = posElement.query(".//*[count(*)=0]");
         for (int i = 0; i < nodes.size(); i++) {
             Element element = (Element) nodes.get(i);
             String matchedString = caseInsensitive ? element.getValue().toLowerCase() : element.getValue();
-            nodeNameContentMap.add(element.getLocalName(), matchedString);
+            nodeNameContentMap.put(element.getLocalName(), matchedString);
         }
         return nodeNameContentMap;
     }
 
-    public ListMap<String, String> mapLeafContentToNodeName(List<POSElement> elementList) {
-        ListMap<String, String> nodeNameContentMap = new ListMap<String, String>();
+    public ListMultimap<String, String> mapLeafContentToNodeName(List<POSElement> elementList) {
+        ListMultimap<String, String> nodeNameContentMap = ArrayListMultimap.create();
         for (POSElement element : elementList) {
-            ListMap<String, String> elementMap = this.mapLeafContentToNodeName(element);
-            nodeNameContentMap.add(elementMap);
+            ListMultimap<String, String> elementMap = this.mapLeafContentToNodeName(element);
+            nodeNameContentMap.putAll(elementMap);
         }
         return nodeNameContentMap;
     }
 
-    public ListMap<String, Element> mapNonLeafContentToNodeName(POSElement posElement) {
-        ListMap<String, Element> nodeNameElementMap = new ListMap<String, Element>();
+    public ListMultimap<String, Element> mapNonLeafContentToNodeName(POSElement posElement) {
+        ListMultimap<String, Element> nodeNameElementMap = ArrayListMultimap.create();
         Nodes nodes = posElement.query(".//*[not(count(*)=0)]");
         for (int i = 0; i < nodes.size(); i++) {
             Element element = new Element((Element) nodes.get(i));
@@ -71,7 +73,7 @@ public class SentenceAnalyzer {
 //            	stripNodes(element, ".//@sf");
             	stripNodes(element, ".//@*");
             }
-            nodeNameElementMap.add(element.getLocalName(), element);
+            nodeNameElementMap.put(element.getLocalName(), element);
         }
         return nodeNameElementMap;
     }
@@ -83,11 +85,11 @@ public class SentenceAnalyzer {
     	}
 	}
 
-	public ListMap<String, Element> mapNonLeafContentToNodeName(List<POSElement> posElements) {
-        ListMap<String, Element> nodeNameElementMap = new ListMap<String, Element>();
+	public ListMultimap<String, Element> mapNonLeafContentToNodeName(List<POSElement> posElements) {
+        ListMultimap<String, Element> nodeNameElementMap = ArrayListMultimap.create();
         for (POSElement posElement : posElements) {
-            ListMap<String, Element> elementMap = mapNonLeafContentToNodeName(posElement);
-            nodeNameElementMap.add(elementMap);
+            ListMultimap<String, Element> elementMap = mapNonLeafContentToNodeName(posElement);
+            nodeNameElementMap.putAll(elementMap);
         }
         return nodeNameElementMap;
     }

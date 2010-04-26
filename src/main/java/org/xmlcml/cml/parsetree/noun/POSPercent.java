@@ -27,7 +27,7 @@ public class POSPercent extends POSNounWithUnits {
     }
     
     private void tidy() {
-    	TreeBankUtil.transformChildNumberAndNNRoleToScalar(this, Type.PERCENT, OTHER_STRING);
+    	TreeBankUtil.transformChildNumberAndNNRoleToScalar(this, Type.RATIO, OTHER_STRING);
     }
 
 }

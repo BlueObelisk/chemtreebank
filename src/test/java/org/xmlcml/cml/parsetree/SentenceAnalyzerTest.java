@@ -11,8 +11,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.xmlcml.cml.parsetree.helpers.CounterMap;
-import org.xmlcml.cml.parsetree.helpers.ListMap;
+import org.xmlcml.cml.parsetree.helpers.TreeBankUtil;
 import org.xmlcml.cml.testutil.JumboTestUtils;
+
+import com.google.common.collect.ListMultimap;
 
 
 /**
@@ -74,13 +76,13 @@ public class SentenceAnalyzerTest {
 //    @Test
 //    @Ignore
 //    public void testGetIndexOfNodesByHashCodeFromSelfAndDescendantNodeNames() throws Exception {
-//        printSentenceListMap(filenames[0]);
+//        printSentenceListMultimap(filenames[0]);
 //    }
 //
 //    @Test
 //    @Ignore
 //    public void testGetIndexOfNodesByHashCodeFromSelfAndDescendantNodeNames1() throws Exception {
-//        ListMap<Integer, POSElement> listMap = new ListMap<Integer, POSElement>();
+//        ListMultimap<Integer, POSElement> listMap = new ListMultimap<Integer, POSElement>();
 //        for (Sentence sentence : sentences) {
 //            listMap.add(sentence.getIndexOfNodesByHashCodeFromSelfAndDescendantNodeNames());
 //        }
@@ -90,46 +92,46 @@ public class SentenceAnalyzerTest {
     @Test
     public void testMapLeafContentToNodeName() {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        ListMap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(fixture.sentence);
-        listMap.printWithCounts();
+        ListMultimap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(fixture.sentence);
+        TreeBankUtil.printWithCounts(listMap);
     }
 
     @Test
     public void testMapLeafContentToNodeNameAllSentences() {
         SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        ListMap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(fixture.sentenceList);
-        listMap.printWithCounts();
+        ListMultimap<String, String> listMap = sentenceAnalyzer.mapLeafContentToNodeName(fixture.sentenceList);
+        TreeBankUtil.printWithCounts(listMap);
     }
     
     @Test
     public void testMapNonLeafContentToNodeNameSingleSentence() {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(fixture.sentence);
+        ListMultimap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(fixture.sentence);
         Assert.assertNotNull(listMap);
-        listMap.printWithCounts();
+        TreeBankUtil.printWithCounts(listMap);
     }
 
     @Test
     public void testMapNonLeafContentToNodeNameAllSentences() {
     	SentenceAnalyzer sentenceAnalyzer = new SentenceAnalyzer();
-        ListMap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(fixture.sentenceList);
+        ListMultimap<String, Element> listMap = sentenceAnalyzer.mapNonLeafContentToNodeName(fixture.sentenceList);
         Assert.assertNotNull(listMap);
-        listMap.printWithCounts();
+        TreeBankUtil.printWithCounts(listMap);
     }
 
     
-//    private ListMap<Integer, POSElement> getListMapForSentence(String filename) throws IOException, ParsingException {
+//    private ListMultimap<Integer, POSElement> getListMultimapForSentence(String filename) throws IOException, ParsingException {
 //
 //    	POSDocument document = POSDocument.parseDocument(filename);
 //        List<POSSentence> sentences = document.getSentenceList();
 //        for (POSSentence sentence : sentences) {
-//        	ListMap<Integer, POSElement> listMap = document.getIndexOfNodesByHashCodeFromSelfAndDescendantNodeNames();
+//        	ListMultimap<Integer, POSElement> listMap = document.getIndexOfNodesByHashCodeFromSelfAndDescendantNodeNames();
 //        return listMap;
 //    }
 //
 //
-//    private ListMap<Integer, POSElement>  printSentenceListMap(String filename) throws ParsingException, IOException {
-//        ListMap<Integer, POSElement> listMap = getListMapForSentence(filename);
+//    private ListMultimap<Integer, POSElement>  printSentenceListMultimap(String filename) throws ParsingException, IOException {
+//        ListMultimap<Integer, POSElement> listMap = getListMultimapForSentence(filename);
 //        listMap.print();
 //        return listMap;
 //    }

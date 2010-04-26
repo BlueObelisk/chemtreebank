@@ -1,6 +1,7 @@
 package org.xmlcml.cml.parsetree.helpers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import nu.xom.Element;
@@ -10,10 +11,11 @@ import org.apache.log4j.Logger;
 import org.xmlcml.cml.base.CMLConstants;
 import org.xmlcml.cml.element.CMLScalar;
 import org.xmlcml.cml.parsetree.POSElement;
-import org.xmlcml.cml.parsetree.adj.POSAdj;
-import org.xmlcml.cml.parsetree.helpers.Units.Name;
 import org.xmlcml.cml.parsetree.helpers.Units.Type;
 import org.xmlcml.cml.parsetree.number.POSNumber;
+
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 
 public class TreeBankUtil {
 
@@ -69,9 +71,9 @@ public class TreeBankUtil {
     			"' or @role='"+otherString+"']");
     	if (neighbours != null) {
     		String unitValue = neighbours.get(1).getValue();
-    		Units units = Units.getUnits(type, unitValue);
+    		Units units = Units.getSingleUnits(unitValue);
     		if (units == null) {
-    			LOG.error("bad units ("+type+", "+unitValue+") "+posElement.toXML());
+    			LOG.error("bad units ("+unitValue+") "+posElement.toXML());
     			return;
     		}
     		Double d = ((POSNumber)neighbours.get(0)).getDouble();
@@ -179,12 +181,69 @@ public class TreeBankUtil {
 		return (element.query("text()").size() == 1 && element.getChildCount() == 1);
 	}
 
-	public static CMLScalar replaceStringContainerByScalar(Element stringContainer, double doubleValue, Name unitName) {
+	public static CMLScalar replaceStringContainerByScalar(Element stringContainer, double doubleValue, Units units) {
 		CMLScalar scalar = new CMLScalar(doubleValue);
-		Units units = Units.getUnits(unitName);
 		scalar.setUnits(units.getPrefix(), units.getId(), units.getNamespace());
 		stringContainer.getParent().replaceChild(stringContainer, scalar);
 		return scalar;
 	}
+	
+	public static <K, T>void printWithCounts(ListMultimap<K, T> listMap) {
+        K[] keys = (K[])listMap.keySet().toArray();
+        Arrays.sort(keys);
+        for (K key : keys) {
+            System.out.println(">>>>> "+key);
+            List<T> nodeList = listMap.get(key);
+            ListMultimap<String, T> listMapx = ArrayListMultimap.create();
+            for (T t : nodeList) {
+                String ts = getString(t);
+                listMapx.put(ts, t);
+            }
+            printFrequencies(listMapx);
+        }
+    }
+
+//	public static void printWithCounts(ListMultimap<Object, Object> listMap) {
+//        Object[] keys = (Object[])listMap.keySet().toArray();
+//        Arrays.sort(keys);
+//        for (Object key : keys) {
+//            System.out.println(">>>>> "+key);
+//            List<Object> nodeList = listMap.get(key);
+//            ListMultimap<Object, Object> listMapx = ArrayListMultimap.create();
+//            for (Object t : nodeList) {
+////                String ts = getString(t);
+//                String ts = t.toString();
+//                listMapx.put(ts, t);
+//            }
+//            printFrequencies(listMapx);
+//        }
+//    }
+
+    public static <K, T>void printFrequencies(ListMultimap<K, T> listMap) {
+        for (K key : listMap.keySet()) {
+            System.out.println(""+key+": "+listMap.get(key).size());
+        }
+    }
+
+    //FIXME HORRIBLE
+    // something needs subclassing for this
+    public static String getString(Object t) {
+        String s = t.getClass().getName();
+        if (t instanceof String) {
+            s = (String) t;
+        } else if (t instanceof Element) {
+            Element copy = new Element((Element)t);
+            Nodes texts = copy.query("//text()");
+            for (int i = 0; i < texts.size(); i++) {
+                texts.get(i).detach();
+            }
+            s = copy.toXML();
+        } else if (t instanceof Element) {
+            // skipped
+            s = ((Element)t).toXML();
+        }
+        return s;
+    }
+
 	
 }

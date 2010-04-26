@@ -11,10 +11,10 @@
             <molecule xmlns="http://www.xml-cml.org/schema">
               <name>124C</name>
               <amount role="MASS">
-                <scalar dataType="xsd:double" units="units:g">7.0</scalar>
+                <scalar dataType="xsd:double" units="units:gram">7.0</scalar>
               </amount>
               <amount role="AMOUNT">
-                <scalar dataType="xsd:double" units="units:mmol">32.4</scalar>
+                <scalar dataType="xsd:double" units="units:millimol">32.4</scalar>
               </amount>
             </molecule>
           </NN>
@@ -32,7 +32,7 @@
             </formula>
             <name>H2SO4</name>
             <amount role="VOLUME">
-              <scalar dataType="xsd:double" units="units:mL">9.5</scalar>
+              <scalar dataType="xsd:double" units="units:millilitre">9.5</scalar>
             </amount>
           </molecule>
         </NN>
@@ -56,7 +56,7 @@
                   </formula>
                   <name>H2SO4</name>
                   <amount role="VOLUME">
-                    <scalar dataType="xsd:double" units="units:mL">9.5</scalar>
+                    <scalar dataType="xsd:double" units="units:millilitre">9.5</scalar>
                   </amount>
                 </molecule>
               </NN>
@@ -69,7 +69,7 @@
                   </formula>
                   <name>HNO3</name>
                   <amount role="VOLUME">
-                    <scalar dataType="xsd:double" units="units:mL">13.0</scalar>
+                    <scalar dataType="xsd:double" units="units:millilitre">13.0</scalar>
                   </amount>
                 </molecule>
               </NN>
@@ -136,7 +136,7 @@
                   </formula>
                   <name>NaOH</name>
                   <amount role="VOLUME">
-                    <scalar dataType="xsd:double" units="units:mL">150.0</scalar>
+                    <scalar dataType="xsd:double" units="units:millilitre">150.0</scalar>
                   </amount>
                 </molecule>
               </NN>
@@ -186,7 +186,7 @@
               <formula inline="ClCCl" convention="SMILES"/>
               <name>dichloromethane</name>
               <amount role="VOLUME">
-                <scalar dataType="xsd:double" units="units:mL">400.0</scalar>
+                <scalar dataType="xsd:double" units="units:millilitre">400.0</scalar>
               </amount>
             </molecule>
           </NN>

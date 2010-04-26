@@ -42,7 +42,9 @@ public class POSDocument extends POSElement {
     
     private void tidy() {
     	if (this.query(POSSentence.TAG).size() != this.getChildElements().size()) {
-    		throw new POSException("Only Sentence children allowed in Document");
+//    		CMLUtil.debug(this, "CHILDREN?");
+//    		throw new POSException("Only Sentence children allowed in Document");
+    		LOG.error("Only Sentence children allowed in Document");
     	}
     }
 

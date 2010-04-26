@@ -6,7 +6,6 @@
 package org.xmlcml.cml.parsetree;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import nu.xom.Attribute;
@@ -17,14 +16,19 @@ import nu.xom.Nodes;
 
 import org.apache.log4j.Logger;
 import org.xmlcml.cml.base.CMLConstants;
+import org.xmlcml.cml.base.CMLUtil;
 import org.xmlcml.cml.parsetree.adj.POSAdj;
 import org.xmlcml.cml.parsetree.adj.POSJjr;
+import org.xmlcml.cml.parsetree.adj.POSJjs;
 import org.xmlcml.cml.parsetree.adj.POSJjt;
+import org.xmlcml.cml.parsetree.adj.POSMolar;
 import org.xmlcml.cml.parsetree.adj.POSOscarCJ;
 import org.xmlcml.cml.parsetree.adverb.POSAdverb;
+import org.xmlcml.cml.parsetree.adverb.POSRP;
+import org.xmlcml.cml.parsetree.adverb.POSRbConj;
 import org.xmlcml.cml.parsetree.adverb.POSRbr;
 import org.xmlcml.cml.parsetree.adverb.POSRbs;
-import org.xmlcml.cml.parsetree.helpers.ListMap;
+import org.xmlcml.cml.parsetree.adverb.POSWRB;
 import org.xmlcml.cml.parsetree.noun.POSAmount;
 import org.xmlcml.cml.parsetree.noun.POSApparatus;
 import org.xmlcml.cml.parsetree.noun.POSMass;
@@ -36,6 +40,8 @@ import org.xmlcml.cml.parsetree.noun.POSNoun;
 import org.xmlcml.cml.parsetree.noun.POSNouns;
 import org.xmlcml.cml.parsetree.noun.POSOscarCD;
 import org.xmlcml.cml.parsetree.noun.POSOscarCM;
+import org.xmlcml.cml.parsetree.noun.POSOscarCPR;
+import org.xmlcml.cml.parsetree.noun.POSOscarRN;
 import org.xmlcml.cml.parsetree.noun.POSPercent;
 import org.xmlcml.cml.parsetree.noun.POSQuantity;
 import org.xmlcml.cml.parsetree.noun.POSVolume;
@@ -48,21 +54,33 @@ import org.xmlcml.cml.parsetree.phrase.POSTimePhrase;
 import org.xmlcml.cml.parsetree.phrase.POSVerbPhrase;
 import org.xmlcml.cml.parsetree.pos.misc.POSCc;
 import org.xmlcml.cml.parsetree.pos.misc.POSDt;
+import org.xmlcml.cml.parsetree.pos.misc.POSEx;
 import org.xmlcml.cml.parsetree.pos.misc.POSFw;
+import org.xmlcml.cml.parsetree.pos.misc.POSMd;
+import org.xmlcml.cml.parsetree.pos.misc.POSNeg;
+import org.xmlcml.cml.parsetree.pos.misc.POSPdt;
 import org.xmlcml.cml.parsetree.pos.misc.POSUnknown;
 import org.xmlcml.cml.parsetree.pos.misc.POSUnmatched;
 import org.xmlcml.cml.parsetree.pos.misc.POSWdt;
 import org.xmlcml.cml.parsetree.prep.POSIn;
 import org.xmlcml.cml.parsetree.prep.POSTo;
+import org.xmlcml.cml.parsetree.pronoun.POSPrp;
+import org.xmlcml.cml.parsetree.pronoun.POSWp;
+import org.xmlcml.cml.parsetree.punct.POSApost;
 import org.xmlcml.cml.parsetree.punct.POSColon;
 import org.xmlcml.cml.parsetree.punct.POSComma;
 import org.xmlcml.cml.parsetree.punct.POSDash;
+import org.xmlcml.cml.parsetree.punct.POSLSQB;
 import org.xmlcml.cml.parsetree.punct.POSLrb;
+import org.xmlcml.cml.parsetree.punct.POSRSQB;
 import org.xmlcml.cml.parsetree.punct.POSRrb;
+import org.xmlcml.cml.parsetree.punct.POSSYM;
 import org.xmlcml.cml.parsetree.punct.POSStop;
 import org.xmlcml.cml.parsetree.verb.POSVBD;
 import org.xmlcml.cml.parsetree.verb.POSVBG;
 import org.xmlcml.cml.parsetree.verb.POSVBN;
+import org.xmlcml.cml.parsetree.verb.POSVBP;
+import org.xmlcml.cml.parsetree.verb.POSVBZ;
 import org.xmlcml.cml.parsetree.verb.POSVerb;
 
 
@@ -169,7 +187,9 @@ public abstract class POSElement extends Element {
 	}
 
 	public void setRole(String role) {
-		this.addAttribute(new Attribute(ROLE, role));
+		if (role != null) {
+			this.addAttribute(new Attribute(ROLE, role));
+		}
 	}
 	
 	public String getRole() {
@@ -219,7 +239,7 @@ public abstract class POSElement extends Element {
 		}
 	}
 	
-	public static POSElement createNode(Element rawElement) {
+	public static POSElement createNode(Element rawElement) throws POSException {
 		POSElement posElement = null;
 		String tag = rawElement.getLocalName();
 		if (tag == null) {
@@ -230,6 +250,8 @@ public abstract class POSElement extends Element {
 			posElement = new POSAdverb(rawElement);
 		} else if (tag.equals(POSAmount.TAG)) {
 			posElement = new POSAmount(rawElement);
+		} else if (tag.equals(POSApost.TAG)) {
+			posElement = new POSApost(rawElement);
 		} else if (tag.equals(POSApparatus.TAG)) {
 			posElement = new POSApparatus(rawElement);
 		} else if (tag.equals(POSAtmospherePhrase.TAG)) {
@@ -248,20 +270,30 @@ public abstract class POSElement extends Element {
 			posElement = new POSDocument(rawElement);
 		} else if (tag.equals(POSDt.TAG)) {
 			posElement = new POSDt(rawElement);
+		} else if (tag.equals(POSEx.TAG)) {
+			posElement = new POSEx(rawElement);
 		} else if (tag.equals(POSFw.TAG)) {
 			posElement = new POSFw(rawElement);
 		} else if (tag.equals(POSIn.TAG)) {
 			posElement = new POSIn(rawElement);
 		} else if (tag.equals(POSJjr.TAG)) {
 			posElement = new POSJjr(rawElement);
+		} else if (tag.equals(POSJjs.TAG)) {
+			posElement = new POSJjs(rawElement);
 		} else if (tag.equals(POSJjt.TAG)) {
 			posElement = new POSJjt(rawElement);
 		} else if (tag.equals(POSLrb.TAG)) {
 			posElement = new POSLrb(rawElement);
+		} else if (tag.equals(POSLSQB.TAG)) {
+			posElement = new POSLSQB(rawElement);
 		} else if (tag.equals(POSMass.TAG)) {
 			posElement = new POSMass(rawElement);
+		} else if (tag.equals(POSMd.TAG)) {
+			posElement = new POSMd(rawElement);
 		} else if (tag.equals(POSMixture.TAG)) {
 			posElement = new POSMixture(rawElement);
+		} else if (tag.equals(POSMolar.TAG)) {
+			posElement = new POSMolar(rawElement);
 		} else if (tag.equals(POSMolecule.TAG)) {
 			posElement = new POSMolecule(rawElement);
 		} else if (tag.equals(POSOscarCD.TAG)) {
@@ -271,6 +303,12 @@ public abstract class POSElement extends Element {
 		} else if (tag.equals(POSOscarCM.TAG) ||
 				tag.equals(POSOscarCM.TAG1)) {
 			posElement = new POSOscarCM(rawElement);
+		} else if (tag.equals(POSOscarCPR.TAG)) {
+			posElement = new POSOscarCPR(rawElement);
+		} else if (tag.equals(POSOscarRN.TAG)) {
+			posElement = new POSOscarRN(rawElement);
+		} else if (tag.equals(POSNeg.TAG)) {
+			posElement = new POSNeg(rawElement);
 		} else if (tag.equals(POSNNP.TAG)) {
 			posElement = new POSNNP(rawElement);
 		} else if (tag.equals(POSNoun.TAG)) {
@@ -281,22 +319,34 @@ public abstract class POSElement extends Element {
 			posElement = new POSNnMass(rawElement);
 		} else if (tag.equals(POSNounPhrase.TAG)) {
 			posElement = new POSNounPhrase(rawElement);
+		} else if (tag.equals(POSPdt.TAG)) {
+			posElement = new POSPdt(rawElement);
 		} else if (tag.equals(POSPercent.TAG)) {
 			posElement = new POSPercent(rawElement);
+		} else if (tag.equals(POSPrp.TAG)) {
+			posElement = new POSPrp(rawElement);
 		} else if (tag.equals(POSPrepPhrase.TAG)) {
 			posElement = new POSPrepPhrase(rawElement);
 		} else if (tag.equals(POSQuantity.TAG)) {
 			posElement = new POSQuantity(rawElement);
+		} else if (tag.equals(POSRbConj.TAG)) {
+			posElement = new POSRbConj(rawElement);
 		} else if (tag.equals(POSRbr.TAG)) {
 			posElement = new POSRbr(rawElement);
 		} else if (tag.equals(POSRbs.TAG)) {
 			posElement = new POSRbs(rawElement);
+		} else if (tag.equals(POSRP.TAG)) {
+			posElement = new POSRP(rawElement);
 		} else if (tag.equals(POSRrb.TAG)) {
 			posElement = new POSRrb(rawElement);
+		} else if (tag.equals(POSRSQB.TAG)) {
+			posElement = new POSRSQB(rawElement);
 		} else if (tag.equals(POSSentence.TAG)) {
 			posElement = new POSSentence(rawElement);
 		} else if (tag.equals(POSStop.TAG)) {
 			posElement = new POSStop(rawElement);
+		} else if (tag.equals(POSSYM.TAG)) {
+			posElement = new POSSYM(rawElement);
 		} else if (tag.equals(POSTempPhrase.TAG)) {
 			posElement = new POSTempPhrase(rawElement);
 		} else if (tag.equals(POSTimePhrase.TAG)) {
@@ -309,6 +359,10 @@ public abstract class POSElement extends Element {
 			posElement = new POSVBG(rawElement);
 		} else if (tag.equals(POSVBN.TAG)) {
 			posElement = new POSVBN(rawElement);
+		} else if (tag.equals(POSVBP.TAG)) {
+			posElement = new POSVBP(rawElement);
+		} else if (tag.equals(POSVBZ.TAG)) {
+			posElement = new POSVBZ(rawElement);
 		} else if (tag.equals(POSVerb.TAG)) {
 			posElement = new POSVerb(rawElement);
 		} else if (tag.equals(POSVerbPhrase.TAG)) {
@@ -317,6 +371,10 @@ public abstract class POSElement extends Element {
 			posElement = new POSVolume(rawElement);
 		} else if (tag.equals(POSWdt.TAG)) {
 			posElement = new POSWdt(rawElement);
+		} else if (tag.equals(POSWp.TAG)) {
+			posElement = new POSWp(rawElement);
+		} else if (tag.equals(POSWRB.TAG)) {
+			posElement = new POSWRB(rawElement);
 			
 		} else if (tag.equals(POSUnmatched.TAG)) {
 			posElement = new POSUnmatched(rawElement);
@@ -335,9 +393,10 @@ public abstract class POSElement extends Element {
 			posElement = new POSUnknown(rawElement);
 			
 		} else {
-			throw new POSException("Unknown element: "+tag);
-//			LOG.error("Unknown element: "+tag);
-//			posElement = new POSUnknown(rawElement);
+//			throw new POSException("Unknown element: "+tag);
+			CMLUtil.debug(rawElement, "UNKNOWN tag");
+			LOG.error("Unknown element: "+tag);
+			posElement = new POSUnknown(rawElement);
 		}
 		return posElement;
 	}
