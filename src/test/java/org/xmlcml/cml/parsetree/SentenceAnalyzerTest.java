@@ -9,6 +9,7 @@ import nu.xom.Element;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.xmlcml.cml.parsetree.helpers.CounterMap;
 import org.xmlcml.cml.parsetree.helpers.TreeBankUtil;
