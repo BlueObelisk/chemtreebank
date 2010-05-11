@@ -34,6 +34,7 @@ public class SentenceAnalyzerTest {
 	}
     
     @Test
+    @Ignore
     public void testSentence() throws Exception {
         Assert.assertEquals("Nodes", 4, fixture.sentence.getChildElements().size());
 		Element ref = JumboTestUtils.parseValidFile(fixture.refdir+"/file1.xml");
