@@ -67,6 +67,9 @@ public class POSNounPhrase extends POSPhrase {
     	createMoleculeList();
     }
 
+    @Override
+    protected String getTag() {return TAG;}
+    
     String ELEMENTAL_PATTERN0_S = "([A-Z][a-z]?)\\s+(\\d+\\.\\d+)\\s*\\%?\\s*\\,?\\s*";
     Pattern ELEMENTAL_PATTERN0 = Pattern.compile("("+ELEMENTAL_PATTERN0_S+")(.*)");
     Pattern ELEMENTAL_PATTERN = Pattern.compile("(found|calc(ulate)?d?):?\\s+(("+ELEMENTAL_PATTERN0_S+")+)\\s*");
@@ -128,7 +131,8 @@ public class POSNounPhrase extends POSPhrase {
 				if (dd != null) {
 					// bug in element percentages
 				} else {
-					LOG.error("Unknown units: "+unit.getValue());
+//					CMLUtil.debug(this, "UNIT");
+					System.out.print(" [UNITS? "+unit.getValue()+"] ");
 				}
 			} else if (unitList.size() > 1) {
 				LOG.error("Ambiguous units: "+unit.getValue());

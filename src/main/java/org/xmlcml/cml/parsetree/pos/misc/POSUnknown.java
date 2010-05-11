@@ -25,4 +25,7 @@ public class POSUnknown extends POSElement {
     	this.setRole(element.getLocalName());
     }
     
+    @Override
+    protected String getTag() {return TAG;}
+    
 }

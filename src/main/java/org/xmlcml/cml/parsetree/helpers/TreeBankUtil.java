@@ -1,5 +1,7 @@
 package org.xmlcml.cml.parsetree.helpers;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -73,7 +75,7 @@ public class TreeBankUtil {
     		String unitValue = neighbours.get(1).getValue();
     		Units units = Units.getSingleUnits(unitValue);
     		if (units == null) {
-    			LOG.error("bad units ("+unitValue+") "+posElement.toXML());
+    			System.out.print(" [BAD UNITS "+unitValue+"] ");
     			return;
     		}
     		Double d = ((POSNumber)neighbours.get(0)).getDouble();
@@ -244,6 +246,21 @@ public class TreeBankUtil {
         }
         return s;
     }
+
+    /**#
+     * avoids the checked exception
+     * @param file
+     * @return
+     */
+	public static String getCanonicalPath(File file) {
+		String path = null;
+		try {
+			path = file.getCanonicalPath();
+		} catch (IOException e) {
+			throw new RuntimeException("cannot canonicalize", e);
+		}
+		return path;
+	}
 
 	
 }

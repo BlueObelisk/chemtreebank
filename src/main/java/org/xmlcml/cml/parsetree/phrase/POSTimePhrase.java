@@ -42,6 +42,9 @@ public class POSTimePhrase extends POSElement {
 		replaceNonNumericPhrases();
 	}
 
+    @Override
+    protected String getTag() {return TAG;}
+    
 	private void replaceNonNumericPhrases() {
 		Nodes rt = this.query("NN[.='overnight']");
 		if (rt.size() == 1) {

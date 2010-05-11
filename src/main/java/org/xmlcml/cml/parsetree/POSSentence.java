@@ -26,4 +26,7 @@ public class POSSentence extends POSElement {
     private void tidy() {
     }
 
+    @Override
+    protected String getTag() {return TAG;}
+    
 }

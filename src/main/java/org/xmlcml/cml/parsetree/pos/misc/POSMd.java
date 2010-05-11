@@ -24,4 +24,7 @@ public class POSMd extends POSElement {
     	this.setRole(TAG);
     }
 
+    @Override
+    protected String getTag() {return TAG;}
+    
 }

@@ -23,4 +23,7 @@ public class POSFw extends POSElement {
     	super(TAG, element);
     }
 
+    @Override
+    protected String getTag() {return TAG;}
+    
 }

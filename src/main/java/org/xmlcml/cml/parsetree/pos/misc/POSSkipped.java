@@ -23,4 +23,7 @@ public class POSSkipped extends POSElement {
 //    	addChildren(this, element);
     }
     
+    @Override
+    protected String getTag() {return TAG;}
+    
 }

@@ -89,7 +89,7 @@ public class POSQuantity extends POSNoun {
 			} else if (processTimes()) {
 			} else {
 				CMLUtil.debug((Element)this, "THIS");
-				throw new POSException("Quantity must have scalar children "+this.toXML());
+				LOG.error("Quantity must have scalar children "+this.toXML());
 			}
 		} else {
 			CMLAmount amount = new CMLAmount();

@@ -38,6 +38,65 @@ public class Units {
 	private static ListMultimap<String, Units> unitListByAbbreviationMap;
 
 /*
+[UNITS? K.hr-1]86415 
+[UNITS? K/hour]
+[UNITS? Kh-1]
+[UNITS? atm]
+[UNITS? centidegree]
+[UNITS? dram]
+[UNITS? g/ml]
+[UNITS? g/mol):]
+[UNITS? kJ]
+[UNITS? mTorr]
+[UNITS? mbar]  
+[UNITS? mol-1]  
+[UNITS? mol.L-1]
+[UNITS? oC.h-1]
+[UNITS? overnight] 130097 
+[UNITS? torr]
+[UNITS? °C.h-1]
+[UNITS? °C/h]
+[UNITS? °K/h]
+[UNITS? °K/h]  
+[UNITS? µS.cm-1]  
+mixed content <JJ sf="M"><NN sf="M" role="MOLAR">M</NN></JJ>
+bad units (G) <NN sf="6 G" role="MASS"><Number sf="6">6</Number><NN sf="G" role="NN-MASS">G</NN></NN>
+bad units (H) <NounPhrase sf="1 H NMR"><Number sf="1">1</Number><NN sf="H" role="TIME">H</NN><NNP sf="NMR">NMR</NNP></NounPhrase>
+bad units (H) <NounPhrase sf="1 H"><Number sf="1">1</Number><NN sf="H" role="TIME">H</NN></NounPhrase>
+bad units (H) <NounPhrase sf="1H-NMR(CDCl3 , 300 MHz): ?6.98 ( t , 1 H ) , 7.04 ( d , 1 H ) , 7.34(d , 2 H"><NN sf="1H-NMR(CDCl3" role="MOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>1H-NMR(CDCl3</name></molecule></NN><Punct sf="," role="COMMA">,</Punct><Number sf="300">300</Number><NN sf="MHz):">MHz):</NN><NN sf="?6.98" role="UNNAMEDMOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>?6.98</name></molecule><molecule xmlns="http://www.xml-cml.org/schema" ref="?6.98" /></NN><NN sf="( t , 1 H )" role="MIXTURE"><Punct sf="(" role="_-LRB-">(</Punct><NN sf="t">t</NN><Punct sf="," role="COMMA">,</Punct><Number sf="1">1</Number><NN sf="H" role="TIME">H</NN><Punct sf=")" role="_-RRB-">)</Punct></NN><Punct sf="," role="COMMA">,</Punct><NN sf="7.04" role="UNNAMEDMOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>7.04</name></molecule><molecule xmlns="http://www.xml-cml.org/schema" ref="7.04" /></NN><NN sf="( d , 1 H )" role="MIXTURE"><Punct sf="(" role="_-LRB-">(</Punct><NN sf="d" role="TIME">d</NN><Punct sf="," role="COMMA">,</Punct><Number sf="1">1</Number><NN sf="H" role="TIME">H</NN><Punct sf=")" role="_-RRB-">)</Punct></NN><Punct sf="," role="COMMA">,</Punct><NN sf="7.34(d" role="MOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>7.34(d</name></molecule></NN><Punct sf="," role="COMMA">,</Punct><Number sf="2">2</Number><NN sf="H" role="TIME">H</NN></NounPhrase>
+bad units (H) <NounPhrase sf="1H-NMR(CDCl3 , 300 MHz): ?6.98 ( t , 1 H ) , 7.08 ( d , 1 H ) , 7.37(t , 2 H"><NN sf="1H-NMR(CDCl3" role="MOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>1H-NMR(CDCl3</name></molecule></NN><Punct sf="," role="COMMA">,</Punct><Number sf="300">300</Number><NN sf="MHz):">MHz):</NN><NN sf="?6.98" role="UNNAMEDMOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>?6.98</name></molecule><molecule xmlns="http://www.xml-cml.org/schema" ref="?6.98" /></NN><NN sf="( t , 1 H )" role="MIXTURE"><Punct sf="(" role="_-LRB-">(</Punct><NN sf="t">t</NN><Punct sf="," role="COMMA">,</Punct><Number sf="1">1</Number><NN sf="H" role="TIME">H</NN><Punct sf=")" role="_-RRB-">)</Punct></NN><Punct sf="," role="COMMA">,</Punct><NN sf="7.08" role="UNNAMEDMOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>7.08</name></molecule><molecule xmlns="http://www.xml-cml.org/schema" ref="7.08" /></NN><NN sf="( d , 1 H )" role="MIXTURE"><Punct sf="(" role="_-LRB-">(</Punct><NN sf="d" role="TIME">d</NN><Punct sf="," role="COMMA">,</Punct><Number sf="1">1</Number><NN sf="H" role="TIME">H</NN><Punct sf=")" role="_-RRB-">)</Punct></NN><Punct sf="," role="COMMA">,</Punct><NN sf="7.37(t" role="MOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>7.37(t</name></molecule></NN><Punct sf="," role="COMMA">,</Punct><Number sf="2">2</Number><NN sf="H" role="TIME">H</NN></NounPhrase>
+bad units (H) <NounPhrase sf="2 H"><Number sf="2">2</Number><NN sf="H" role="TIME">H</NN></NounPhrase>
+bad units (H) <NounPhrase sf="7.08(tt , 2 H"><NNP sf="7.08(tt">7.08(tt</NNP><Punct sf="," role="COMMA">,</Punct><Number sf="2">2</Number><NN sf="H" role="TIME">H</NN></NounPhrase>
+bad units (H) <NounPhrase sf="7.20(tt , 2 H"><NNP sf="7.20(tt">7.20(tt</NNP><Punct sf="," role="COMMA">,</Punct><Number sf="2">2</Number><NN sf="H" role="TIME">H</NN></NounPhrase>
+bad units (H) <NounPhrase sf="8.43(d , 2 H"><NN sf="8.43(d" role="MOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>8.43(d</name></molecule></NN><Punct sf="," role="COMMA">,</Punct><Number sf="2">2</Number><NN sf="H" role="TIME">H</NN></NounPhrase>
+bad units (H) <NounPhrase sf="Ph )] , 6.47 
+bad units (H) <NounPhrase sf="pseudo- tt , J = 7.75 , 1.32 Hz , 1 H , C6H4"><DT sf="pseudo-">pseudo-</DT><NN sf="tt" role="MOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>tt</name></molecule></NN><Punct sf="," role="COMMA">,</Punct><NNP sf="J">J</NNP><Punct sf="=" role="SYM">=</Punct><NN sf="7.75" role="UNNAMEDMOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><name>7.75</name></molecule><molecule xmlns="http://www.xml-cml.org/schema" ref="7.75" /></NN><Punct sf="," role="COMMA">,</Punct><Number sf="1.32">1.32</Number><NNP sf="Hz">Hz</NNP><Punct sf="," role="COMMA">,</Punct><Number sf="1">1</Number><NN sf="H" role="TIME">H</NN><Punct sf="," role="COMMA">,</Punct><NN sf="C6H4" role="MOLECULE"><molecule xmlns="http://www.xml-cml.org/schema"><formula concise="C 6 H 4"><atomArray elementType="C H" count="6.0 4.0" /></formula><name>C6H4</name></molecule></NN></NounPhrase>
+bad units (HRPD) <NounPhrase sf="beamline 8 C2- HRPD"><NN sf="beamline">beamline</NN><Number sf="8">8</Number><NN sf="C2-" role="OSCAR-CPR">C2-</NN><NN sf="HRPD" role="TIME">HRPD</NN></NounPhrase>
+bad units (Mmol) <NN sf="2 Mmol" role="AMOUNT"><Number sf="2">2</Number><NN sf="Mmol" role="AMOUNT">Mmol</NN></NN>
+bad units (cm3of) <NN sf="5 cm3of" role="VOLUME"><Number sf="5">5</Number><NN sf="cm3of" role="VOL">cm3of</NN></NN>
+bad units (hourand) <NounPhrase sf="one hourand"><Number sf="one">one</Number><NN sf="hourand" role="TIME">hourand</NN></NounPhrase>
+bad units (mmoL) <NN sf="0.09 mmoL" role="AMOUNT"><Number sf="0.09">0.09</Number><NN sf="mmoL" role="AMOUNT">mmoL</NN></NN>
+bad units (mmoL) <NN sf="0.1 mmoL" role="AMOUNT"><Number sf="0.1">0.1</Number><NN sf="mmoL" role="AMOUNT">mmoL</NN></NN>
+bad units (mmoL) <NN sf="0.2 mmoL" role="AMOUNT"><Number sf="0.2">0.2</Number><NN sf="mmoL" role="AMOUNT">mmoL</NN></NN>
+bad units (mmoL) <NN sf="0.5 mmoL" role="AMOUNT"><Number sf="0.5">0.5</Number><NN sf="mmoL" role="AMOUNT">mmoL</NN></NN>
+bad units (mmoL) <NN sf="1 mmoL" role="AMOUNT"><Number sf="1">1</Number><NN sf="mmoL" role="AMOUNT">mmoL</NN></NN>
+bad units (mmoL) <NN sf="1.16 mmoL" role="AMOUNT"><Number sf="1.16">1.16</Number><NN sf="mmoL" role="AMOUNT">mmoL</NN></NN>
+bad units (mmoL) <NN sf="2 mmoL" role="AMOUNT"><Number sf="2">2</Number><NN sf="mmoL" role="AMOUNT">mmoL</NN></NN>
+bad units (mmols) <NN sf="2 mmols" role="AMOUNT"><Number sf="2">2</Number><NN sf="mmols" role="AMOUNT">mmols</NN></NN>
+bad units (night) <TimePhrase sf="after one night"><IN sf="after" role="AFTER">after</IN><Number sf="one">one</Number><NN sf="night" role="TIME">night</NN></TimePhrase>
+bad units (night) <TimePhrase sf="for one night"><IN sf="for" role="FOR">for</IN><Number sf="one">one</Number><NN sf="night" role="TIME">night</NN></TimePhrase>
+bad units (overnight) <NounPhrase sf="195 K overnight"><Number sf="195">195</Number><NNP sf="K">K</NNP><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (overnight) <NounPhrase sf="253 K overnight"><Number sf="253">253</Number><NNP sf="K">K</NNP><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (overnight) <NounPhrase sf="273 K and then overnight"><Number sf="273">273</Number><NNP sf="K">K</NNP><CC sf="and" role="CC">and</CC><RB sf="then">then</RB><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (overnight) <NounPhrase sf="277 K overnight"><Number sf="277">277</Number><NNP sf="K">K</NNP><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (overnight) <NounPhrase sf="279 K overnight"><Number sf="279">279</Number><NNP sf="K">K</NNP><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (overnight) <NounPhrase sf="298 K overnight"><Number sf="298">298</Number><NNP sf="K">K</NNP><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (overnight) <NounPhrase sf="343 K overnight"><Number sf="343">343</Number><NNP sf="K">K</NNP><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (overnight) <NounPhrase sf="348 K overnight"><Number sf="348">348</Number><NNP sf="K">K</NNP><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (overnight) <NounPhrase sf="373 K overnight"><Number sf="373">373</Number><NNP sf="K">K</NNP><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (overnight) <NounPhrase sf="393 K overnight"><Number sf="393">393</Number><NNP sf="K">K</NNP><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (overnight) <NounPhrase sf="413 K overnight"><Number sf="413">413</Number><NNP sf="K">K</NNP><NN sf="overnight" role="TIME">overnight</NN></NounPhrase>
+bad units (period) <NounPhrase sf="a 30 minute period"><DT sf="a">a</DT><Number sf="30">30</Number><JJ sf="minute">minute</JJ><NN sf="period" role="TIME">period</NN></NounPhrase>
 Unknown units: µS.cm-1
 Unknown units: ×
  */
@@ -239,7 +298,7 @@ Unknown units: ×
 	static {
 		
 		K_PER_HOUR = createEntry("mlpermin", Type.TEMPERATURE_RATE, "kelvin per hour", 
-				new String[]{"K.h-1", "K/h"});
+			new String[]{"K.h-1", "K/h", "K/hour", "K.hr-1", "Kh-1"});		
 	};
 	
 	public static Units YEAR;

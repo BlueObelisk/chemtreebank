@@ -37,4 +37,7 @@ public class POSNumber extends POSElement {
     		throw new POSException("Cannot interpret number "+this.toXML());
     	}
     }
+    @Override
+    protected String getTag() {return TAG;}
+    
 }

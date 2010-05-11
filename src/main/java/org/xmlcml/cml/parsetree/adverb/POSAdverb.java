@@ -28,4 +28,7 @@ public class POSAdverb extends POSElement {
     	this.setRole(role);
     }
 
+    @Override
+    protected String getTag() {return TAG;}
+    
 }

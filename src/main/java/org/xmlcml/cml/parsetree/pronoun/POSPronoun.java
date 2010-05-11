@@ -33,4 +33,7 @@ public class POSPronoun extends POSElement {
 	private void tidy() {
 	}
     
+    @Override
+    protected String getTag() {return TAG;}
+    
 }

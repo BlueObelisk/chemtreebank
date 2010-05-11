@@ -24,4 +24,7 @@ public class POSPrep extends POSElement {
     	this.setRole(role);
     }
 
+    @Override
+    protected String getTag() {return TAG;}
+    
 }

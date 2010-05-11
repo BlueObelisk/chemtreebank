@@ -41,5 +41,8 @@ public class POSNoun extends POSElement {
 		}
 	}
 
+    @Override
+    protected String getTag() {return TAG;}
+    
     
 }
