@@ -35,6 +35,9 @@ public class POSTempPhrase extends POSElement {
 		replaceNonNumericPhrases();
 	}
 
+    @Override
+    protected String getTag() {return TAG;}
+    
 	private void replaceNonNumericPhrases() {
 		Nodes rt = this.query("NN[.='room temperature']");
 		if (rt.size() == 1) {

@@ -10,10 +10,14 @@ import java.util.Set;
 
 import nu.xom.Attribute;
 import nu.xom.Element;
+import nu.xom.Nodes;
 
 import org.apache.log4j.Logger;
+import org.xmlcml.cml.element.CMLProperty;
+import org.xmlcml.cml.element.CMLScalar;
 import org.xmlcml.cml.parsetree.POSElement;
 import org.xmlcml.cml.parsetree.helpers.TreeBankUtil;
+import org.xmlcml.cml.parsetree.helpers.Units;
 
 /**
  *
@@ -146,9 +150,46 @@ public class POSAdj extends POSElement {
 //    			LOG.info("adjective "+text+"; "+this.getParent());
     		}
     	} else {
-    		LOG.error("mixed content "+this.toXML());
+/*
+<JJ sf="1.0 M">
+  <Number sf="1.0">1.0</Number>
+  <NN sf="M" role="MOLAR">M</NN>
+</JJ> */
+    		
+    		Nodes number = this.query("Number");
+    		Nodes molar = this.query("NN[@role='MOLAR']");
+    		if (number.size() == 1 && molar.size() == 1) {
+    			convertMisparsedJJToMolar((Element) number.get(0), (Element) molar.get(0));
+    		} else {
+    			LOG.error("mixed content "+this.toXML());
+    		}
     	}
     }
+    
+    @Override
+    protected String getTag() {return TAG;}
+    
+
+	private void convertMisparsedJJToMolar(Element number, Element molar) {
+		String value = number.getValue();
+		Double molarValue = null;
+		try {
+			molarValue = new Double(value);
+		} catch (Exception e) {
+			throw new RuntimeException("not a number: "+value);
+		}
+		String molarType = molar.getValue();
+		CMLProperty property = new CMLProperty();
+		property.setDictRef("cmlx:molar");
+		CMLScalar scalar = new CMLScalar();
+		scalar.setValue(molarValue);
+		Units units = Units.getSingleUnits(molarType);
+		scalar.setUnits(units.getPrefix(), units.getId(), units.getNamespace());
+		property.addScalar(scalar);
+		this.removeChildren();
+		this.appendChild(property);
+		System.out.println(" [FIXED MOLAR] ");
+	}
 
 	private boolean annotateColor(String text) {
 		if (colorSet.contains(text)) {

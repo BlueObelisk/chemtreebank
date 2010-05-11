@@ -9,8 +9,13 @@ import java.util.List;
 
 import nu.xom.Attribute;
 import nu.xom.Element;
+import nu.xom.Nodes;
 
 import org.apache.log4j.Logger;
+import org.xmlcml.cml.base.CMLElement;
+import org.xmlcml.cml.base.CMLUtil;
+import org.xmlcml.cml.element.CMLMolecule;
+import org.xmlcml.cml.element.CMLName;
 import org.xmlcml.cml.parsetree.POSElement;
 import org.xmlcml.cml.parsetree.helpers.TreeBankUtil;
 
@@ -38,6 +43,9 @@ public class POSVerbPhrase extends POSElement {
 		concatenateVBD();
 	}
 
+    @Override
+    protected String getTag() {return TAG;}
+    
 	/*
       <VB role="VBD">was</VB>
       <VB role="VBN">carried</VB>

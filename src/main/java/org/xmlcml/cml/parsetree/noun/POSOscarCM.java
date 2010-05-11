@@ -19,7 +19,6 @@ import org.xmlcml.cml.element.CMLMoleculeList;
 import org.xmlcml.cml.parsetree.punct.POSPunct;
 
 /**
- *
  * @author pm286
  */
 public class POSOscarCM extends POSNoun {
@@ -53,13 +52,12 @@ public class POSOscarCM extends POSNoun {
 */    
     private void processOSCARCMandPunct() {
     	Elements childElements = this.getChildElements();
-		Nodes oscarCMs = this.query("NN[@role='OSCAR-CM']");
-		Nodes puncts = this.query("Punct");
+		Nodes oscarCMs = this.query("NN[@role='"+TAG+"']");
+		Nodes puncts = this.query(POSPunct.TAG);
 		if (puncts.size() > 0) {
 			if (this.getChildElements().size() != oscarCMs.size() + puncts.size()) {
 //				LOG.error("non-OSCAR-CML/Punct nodes in "+this.toXML());
 			} else {
-//				CMLUtil.debug(this, "XXXXXXXX ");
 				List<POSOscarCM> oscarList = new ArrayList<POSOscarCM>();
 				oscarList = extractOddNodesAsOSCARCM(childElements, oscarList);
 				if (oscarList != null) {
@@ -112,7 +110,7 @@ public class POSOscarCM extends POSNoun {
 =><NN>aluminium chloride</NN>
      */
 	private void concatenateOSCARCM() {
-		Nodes oscarCMs = this.query("NN[@role='OSCAR-CM']");
+		Nodes oscarCMs = this.query("NN[@role='"+TAG+"']");
 		if (oscarCMs.size() > 0) {
 			if (this.getChildElements().size() > oscarCMs.size()) {
 //				LOG.error("non-OSCAR-CML nodes in "+this.toXML());

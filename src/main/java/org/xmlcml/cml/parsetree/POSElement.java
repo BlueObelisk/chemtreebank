@@ -186,6 +186,12 @@ public abstract class POSElement extends Element {
 		super(tag);
 	}
 
+	protected abstract String getTag();
+	
+	protected String getIdPrefix() {
+		return getTag().toLowerCase();
+	}
+	
 	public void setRole(String role) {
 		if (role != null) {
 			this.addAttribute(new Attribute(ROLE, role));
